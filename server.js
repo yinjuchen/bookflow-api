@@ -1,4 +1,4 @@
-const express = require ('express')
+const express = require('express')
 const bcrypt = require('bcrypt-nodejs')
 const cors = require('cors')
 const nodemailer = require('nodemailer')
@@ -16,10 +16,10 @@ const searchBooks = require('./controllers/booksearch')
 const db = knex({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
-    user: 'tiffanychen',
+    host: 'dpg-cnrgmji0si5c73bvh040-a.oregon-postgres.render.com',
+    user: 'bookflow_data_user',
     port: 5432,
-    password: '',
+    password: 'lEgfQLAnH3SZv1s8apcfXmio7rKPO94w',
     database: 'bookflow-data'
   }
 })
@@ -39,6 +39,9 @@ const app = express()
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
+
+// getting root
+app.get('/', (req, res) => {res.send(db.users)})
 
 // SignIn 
 app.post('/signin', (req, res) => { signin.handleSignIn(req, res, db, bcrypt) })
