@@ -66,7 +66,6 @@ app.get('/recommendation/:userid', (req, res) => { recommendationRetrieve.handle
 app.get('/recommendations', (req, res) => { getAllRecommendations.handleGetAllRecommendation(req, res, db) })
 
 // Search books
-
 app.post('/search-books', async (req, res) => {
   searchBooks.handleSearchbooks(req, res)
 })
