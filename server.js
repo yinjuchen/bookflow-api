@@ -16,11 +16,12 @@ const searchBooks = require('./controllers/booksearch')
 const db = knex({
   client: 'pg',
   connection: {
-    host: 'dpg-cnrgmji0si5c73bvh040-a.oregon-postgres.render.com',
-    user: 'bookflow_data_user',
+    ssl: { rejectUnauthorized: false },
+    connectionString: process.env.DATABASE_URL,
+    user: process.env.DATABASE_USER,
     port: 5432,
-    password: 'lEgfQLAnH3SZv1s8apcfXmio7rKPO94w',
-    database: 'bookflow-data'
+    password: process.env.DATABASE_PW,
+    database: process.env.DATABASE_DB
   }
 })
 
@@ -41,7 +42,7 @@ app.use(express.json())
 app.use(cors())
 
 // getting root
-app.get('/', (req, res) => {res.send(db.users)})
+app.get('/', (req, res) => { res.send(db.users) })
 
 // SignIn 
 app.post('/signin', (req, res) => { signin.handleSignIn(req, res, db, bcrypt) })
